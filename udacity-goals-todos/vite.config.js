@@ -3,6 +3,10 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    allowedHosts: ["localhost", ".prod.udacity-student-workspaces.com"],
+    port: 3000,
+  },
   esbuild: {
     loader: "jsx",
     include: /src\/.*\.jsx?$/,
