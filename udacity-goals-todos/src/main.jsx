@@ -1,25 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './components/App'
-import reducer from './reducers'
-import { thunk } from 'redux-thunk'
-import checker from './middleware/checker'
-import logger from './middleware/logger'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./components/App";
+import reducer from "./reducers";
+import middleware from "./middleware";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-// Replaced createStore with configureStore
-const store = configureStore({
-  reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(thunk, checker, logger)
-})
+const store = createStore(reducer, middleware);
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </StrictMode>,
-)
+  </React.StrictMode>
+);
